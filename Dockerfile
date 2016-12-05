@@ -12,7 +12,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-FROM liberty
+FROM registry.ng.bluemix.net/ibmliberty
 #MAINTAINER Robbie Minshall "rjminsha@us.ibm.com"
 
 # Install the application
