@@ -1,25 +1,67 @@
-# Example pipeline for helloworld node application 
-Bluemix Containers have gone live!  Before you start with this example you need to setup a namespace.  The namespace is set for each organization and will be used for your image repositories names in your organizations private Container Registry.  To setup a namespace, simply login to [Bluemix](https://bluemix.net), and click ![Start Containers](start-containers.jpg).  
-If you have not setup a namespace you will be asked to.  Even if you were a beta participant you will need to create a new namespace.  
+JavaHelloWorldApp Sample
+==============
 
-Now press this button, to get your own copy of the sample running in Bluemix !
+This project contains a simple Servlet application.
 
-[![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://hub.jazz.net/deploy/index.html?repository=https://github.com/Puquios/hello-containers.git)
+## Running the Application Locally in Eclipse with Liberty
 
-## Overview 
-IBM DevOps Services has a Continuous Delivery Pipeline for deploying Cloud Foundry applications, containers, and micro-services to IBM Bluemix. You can use a textual representation of a pipeline defined by a pipeline.yml file, which makes it easy to share and copy interesting pipelines. The Deploy to Bluemix button provides a simple way to clone a project that includes the source files and the Delivery Pipeline configuration. 
+1. Download and install [IBM Eclipse Tools for Bluemix](https://developer.ibm.com/wasdev/downloads/#asset/tools-IBM_Eclipse_Tools_for_Bluemix).
+2. In the Servers view of Eclipse, right-click to create a new WAS Liberty server. Follow the steps in the wizard, which includes the option to download and install the WAS Liberty runtime.
+3. Import this sample into Eclipse using *File -> Import -> Maven -> Existing Maven Projects* option.
+4. Deploy the sample into Liberty server. Right click on the *JavaHelloWorldApp* sample and select *Run As -> Run on Server* option. Find and select the Liberty profile server and press *Finish*. 
+5. Go to: [http://localhost:9080/JavaHelloWorldApp](http://localhost:9080/JavaHelloWorldApp)
 
-## The application 
-Helloworld node application
+## Running the Application in Bluemix using Eclipse
 
-## The pipeline 
-As simple as it gets
-- Build 
-    + Leverages the container build service to take the Dockerfile in the root of the project, builds a docker image that is versioned by tagging based on the build number, and pushes the image to your orgnanization's registry on IBM Bluemix. 
-- Deploy 
-    + • Using the container image from the Build stage, a container group is deployed with a single container to start with, and then a route is generated for the Deploy stage that will be reused across deployments.
+1. Download and install [IBM Eclipse Tools for Bluemix](https://developer.ibm.com/wasdev/downloads/#asset/tools-IBM_Eclipse_Tools_for_Bluemix).
+2. In the Servers view of Eclipse, right-click to create a new IBM Bluemix server. Follow the steps in the wizard.
+3. Import this sample into Eclipse using *File -> Import -> Maven -> Existing Maven Projects* option.
+4. Deploy the sample into Bluemix server. Right click on the *JavaHelloWorldApp* sample and select *Run As -> Run on Server* option. Find and select the Bluemix server and press *Finish*. 
 
-## References 
-- [Blog on continuous delivery for containers](https://developer.ibm.com/bluemix/docs/set-up-continuous-delivery-ibm-containers/)
-- [IBM DevOps Services](http://hub.jazz.net)
-- [IBM Bluemix](http://bluemix.net)
+
+## Running with Maven
+
+This project can be build with [Apache Maven](http://maven.apache.org/). The project uses [Liberty Maven Plug-in][] to automatically download and install Liberty profile runtime from the [Liberty repository](https://developer.ibm.com/wasdev/downloads/). Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
+
+Use the following steps to run the application with Maven:
+
+1. Execute full Maven build. This will cause Liberty Maven Plug-in to download and install Liberty profile server.
+    ```bash
+    $ mvn clean install
+    ```
+
+2. To run a local Liberty server with the JavaHelloWorldApp sample execute:
+    ```bash
+    $ mvn liberty:run-server
+    ```
+
+Once the server is running, the application will be available under [http://localhost:9080/JavaHelloWorldApp](http://localhost:9080/JavaHelloWorldApp).
+
+
+3. To push the application to Bluemix using the cf command line tool:
+    ```bash
+    $ cf push <appname> -p target/JavaHelloWorldApp.war
+    ```
+
+# Notice
+
+© Copyright IBM Corporation 2014.
+
+# License
+
+```text
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+````
+
+[Liberty Maven Plug-in]: https://github.com/WASdev/ci.maven
+
